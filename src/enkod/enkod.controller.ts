@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+	Controller,
+	Get,
+	Post,
+	Body,
+	Patch,
+	Param,
+	Delete,
+} from '@nestjs/common';
 import { EnkodService } from './enkod.service';
 import { CreateEnkodDto } from './dto/create-enkod.dto';
 import { UpdateEnkodDto } from './dto/update-enkod.dto';

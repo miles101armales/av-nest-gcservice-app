@@ -1,4 +1,4 @@
-export class CreateSaleDto {
+export class CreateNullsaleDto {
   idSystemGc: string;
 
   idAzatGc: string;

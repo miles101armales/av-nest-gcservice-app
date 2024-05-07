@@ -1,12 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, OnModuleInit } from '@nestjs/common';
 import { AppService } from './app.service';
+import { SalesController } from './sales/sales.controller';
+import { Cron } from '@nestjs/schedule';
+import { DataSource } from 'typeorm';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
-
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Get('/')
+  async getHello() {
+    this.appService.getHello();
   }
 }

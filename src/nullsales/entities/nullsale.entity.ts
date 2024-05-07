@@ -1,9 +1,9 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Sale {
+export class Nullsale {
   @PrimaryGeneratedColumn({ name: 'id' })
-  id: string;
+  id: number;
 
   @Column({ nullable: true })
   idSystemGc: string;

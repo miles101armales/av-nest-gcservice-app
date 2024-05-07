@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, OnApplicationBootstrap, OnModuleInit } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -7,6 +7,10 @@ import { SalesModule } from './sales/sales.module';
 import { EnkodModule } from './enkod/enkod.module';
 import { PurchasesModule } from './purchases/purchases.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ScheduleModule } from '@nestjs/schedule';
+import { ExportsModule } from './exports/exports.module';
+import { NullsalesModule } from './nullsales/nullsales.module';
+import { DatabaseInitializationService } from './database/db.service';
 
 @Module({
   imports: [
@@ -26,11 +30,25 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         database: configService.get('DB_NAME'),
         synchronize: true,
         entities: [__dirname + '/**/*.entity{.js, .ts}'],
+        manualInitialization: true,
+        toRetry(err) {
+          return false;
+        },
       }),
       inject: [ConfigService],
     }),
+    ScheduleModule.forRoot(),
+    ExportsModule,
+    NullsalesModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, DatabaseInitializationService],
 })
-export class AppModule {}
+export class AppModule implements OnApplicationBootstrap {
+  constructor(
+    private readonly databaseService: DatabaseInitializationService,
+  ) {}
+  onApplicationBootstrap() {
+    this.databaseService.initializeDatabase();
+  }
+}

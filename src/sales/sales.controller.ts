@@ -1,18 +1,21 @@
 import {
-	Controller,
-	Get,
-	Post,
-	Body,
-	Patch,
-	Param,
-	Delete,
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Logger,
 } from '@nestjs/common';
 import { SalesService } from './sales.service';
 import { CreateSaleDto } from './dto/create-sale.dto';
 import { UpdateSaleDto } from './dto/update-sale.dto';
+import { Cron } from '@nestjs/schedule';
 
 @Controller('sales')
 export class SalesController {
+  private readonly logger = new Logger(SalesController.name);
   constructor(private readonly salesService: SalesService) {}
 
   @Post()

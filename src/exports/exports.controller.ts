@@ -17,7 +17,7 @@ export class ExportsController {
 
   constructor(private readonly exportsService: ExportsService) {}
 
-  @Cron('16 19 1,13 * * *')
+  @Cron('16 19 * * *')
   @Get('id')
   async createExportId() {
     try {
@@ -29,7 +29,7 @@ export class ExportsController {
     return;
   }
 
-  @Cron('16 19 7,19 * * *')
+  @Cron('46 20 * * *')
   @Get('id/export')
   async makeExportById() {
     try {

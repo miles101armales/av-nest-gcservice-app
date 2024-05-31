@@ -1,34 +1,40 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Purchase {
   @PrimaryColumn()
-  gcPurchaseId: number;
+  purchaseId: number;
+
+  @Column()
+  user: string;
 
   @Column()
   email: string;
 
   @Column()
-  name: string;
+  product: string;
 
   @Column()
-  gcUserId: number;
+  createdAt: string;
+
+  @Column()
+  type: string;
+
+  @Column()
+  status: string;
+
+  @Column()
+  price: string;
+
+  @Column()
+  payFee: string;
+
+  @Column()
+  payedPrice: string;
+
+  @Column()
+  codePayment: string;
 
   @Column()
   productTitle: string;
-
-  @Column()
-  startAt: string;
-
-  @Column()
-  finishAt: string;
-
-  @Column()
-  period: string;
-
-  @Column()
-  state: string;
-
-  @Column()
-  purchase_ink: string;
 }

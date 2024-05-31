@@ -1,21 +1,25 @@
 export class CreatePurchaseDto {
-  gcPurchaseId: number;
+  purchaseId: number;
+
+  user: string;
 
   email: string;
 
-  name: string;
+  product: string;
 
-  gcUserId: number;
+  createdAt: string;
+
+  type: string;
+
+  status: string;
+
+  price: string;
+
+  payFee: string;
+
+  payedPrice: string;
+
+  codePayment: string;
 
   productTitle: string;
-
-  startAt: string;
-
-  finishAt: string;
-
-  period: string;
-
-  state: string;
-
-  purchase_ink: string;
 }

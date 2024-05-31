@@ -9,6 +9,8 @@ import { Sale } from 'src/sales/entities/sale.entity';
 import { Nullsale } from 'src/nullsales/entities/nullsale.entity';
 import { CreateSaleDto } from 'src/sales/dto/create-sale.dto';
 import { CreateNullsaleDto } from 'src/nullsales/dto/create-nullsale.dto';
+import { Purchase } from 'src/purchases/entities/purchase.entity';
+import { CreatePurchaseDto } from 'src/purchases/dto/create-purchase.dto';
 
 @Injectable()
 export class ExportsService {
@@ -229,8 +231,10 @@ export class ExportsService {
           });
         }
       });
+
       console.log('Количество обычных заказов: ', realArrOfObjects.length);
       console.log('Количество нулевых заказов: ', nullArrOfObjects.length);
+
       const batchSize: number = 100;
 
       const sales: Sale[] = await this.salesRepository.find({

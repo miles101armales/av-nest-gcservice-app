@@ -18,7 +18,7 @@ export class Export {
   export_id: number;
 
   @Column()
-  status: 'creating' | 'exported' | 'bad_export_id';
+  status: 'creating' | 'exported' | 'bad_export_id' | 'ready';
 
   @CreateDateColumn()
   createdAt: Date;

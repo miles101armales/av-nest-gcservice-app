@@ -54,6 +54,17 @@ export class PurchasesService {
       const result = await axios.get(
         `${PREFIX}/exports/${export_id.export_id}?key=${apiKey}`,
       );
+      if (result.data.error && result.data.error_code === 910) {
+        await this.exportsRepository.update(
+          { id: export_id.export_id },
+          { status: 'bad_export_id' },
+        );
+        throw new Error('Файл не создан, попробуйте другой фильтр');
+      }
+      this.exportsRepository.update(
+        { export_id: export_id.export_id },
+        { status: 'exported' },
+      );
       console.log(result.data);
       this.writeExportData(result);
       return result;

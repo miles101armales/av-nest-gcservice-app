@@ -6,6 +6,7 @@ import {
   Param,
   Delete,
   Logger,
+  Query,
 } from '@nestjs/common';
 import { ExportsService } from './exports.service';
 import { UpdateExportDto } from './dto/update-export.dto';
@@ -43,9 +44,9 @@ export class ExportsController {
     }
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.exportsService.findOne(+id);
+  @Get('getsales')
+  async getSales(@Query('month') month: string) {
+    return await this.exportsService.getSalesByDate(month);
   }
 
   @Patch(':id')

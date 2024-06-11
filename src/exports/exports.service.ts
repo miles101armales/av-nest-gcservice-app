@@ -45,6 +45,17 @@ export class ExportsService {
     });
   }
 
+  async getSalesByDate(month: string) {
+    return await this.salesRepository.find({
+      where: {
+        createdAt: Between(
+          `2024-${month}-01 00:00:00`,
+          `${this.nowDateGc} 23:59:59`,
+        ),
+      },
+    });
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} export`;
   }
@@ -190,7 +201,10 @@ export class ExportsService {
             workWithOrder: item[25],
             orderComments: item[26],
             rejectReason: item[27],
-            orderTag: JSON.stringify(item[tagItemIndex]).replace(/[[\]]/g, ''),
+            orderTag: JSON.stringify(item[tagItemIndex]).replace(
+              /[[\]]/g,
+              'tag: ',
+            ),
           });
         } else {
           const tagItemIndex = item.length - 2;
